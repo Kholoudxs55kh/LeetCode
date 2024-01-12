@@ -1,0 +1,27 @@
+// Python
+
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        str_ = s.split()
+        return len(str_[-1])
+
+
+// typescript
+
+function lengthOfLastWord(s: string): number {
+    const lastWord : Array<string> = s.split(" ").filter(s => s !== "")
+    return lastWord[lastWord.length-1].length
+    
+};
+
+
+// javascript
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLastWord = function(s) {
+    st = s.trim().split(' ')
+    return st[st.length - 1].length
+};
