@@ -1,11 +1,18 @@
-class Solution:
-    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-        results = [0] * len(temperatures)
-        stack = []
-        for i, temp in enumerate(temperatures):
-            while stack and temperatures[stack[-1]] < temp:
-                index = stack.pop()
-                results[index] = i - index
-            stack.append(i)
+/**
+ * @param {number[]} temperatures
+ * @return {number[]}
+ */
+var dailyTemperatures = function(temperatures) {
+    const results = new Array(temperatures.length).fill(0);
+    const stack = [];
 
-        return results
+    for (let i = 0; i < temperatures.length; i++) {
+        while (stack.length > 0 && temperatures[i] > temperatures[stack[stack.length - 1]]) {
+            const idx = stack.pop();
+            results[idx] = i - idx;
+        }
+        stack.push(i);
+    }
+
+    return results;    
+};
