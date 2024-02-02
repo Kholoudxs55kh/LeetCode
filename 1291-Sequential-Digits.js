@@ -1,16 +1,25 @@
-10
-720133888
-356481080
-400352825
-1000000000
-1000000000
-45678
-45678
-1235
-2345679
-22
-77
-456789
-12345678
-24
-88
+/**
+ * @param {number} low
+ * @param {number} high
+ * @return {number[]}
+ */
+var sequentialDigits = function(low, high) {
+      const arr = [];
+
+        for (let i = 1; i <= 9; ++i) {
+            let num = i;
+            let next = i + 1;
+
+            while (num <= high && next <= 9) {
+                num = num * 10 + next;
+                if (low <= num && num <= high) {
+                    arr.push(num);
+                }
+                ++next;
+            }
+        }
+        arr.sort((a, b) => a - b);
+        
+        
+        return arr;
+};
