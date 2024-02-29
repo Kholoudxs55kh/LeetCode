@@ -4,9 +4,9 @@
  * @return {number}
  */
 var searchInsert = function(nums, target) {
-    let i = 0\t\t\t\t\t\t\t\t\t\t\t\t\t
+    let i = 0													
     while (i < nums.length) {   
-        if (nums[i] == target || nums[i] > target)\t\t\t\t
+        if (nums[i] == target || nums[i] > target)				
             return i
         i += 1
     }
