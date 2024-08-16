@@ -3,15 +3,20 @@
  * @return {string[]}
  */
 var findRepeatedDnaSequences = function(s) {
-    let set = new Set()
-    let res = new Set()
-
-    for (let i = 0; i < s.length - 9; i++) {
-        if (s[i + 9] != undefined) {
-            const substr = s.substring(i, i + 10)
-            if (!set.has(substr)) set.add(substr)
-            else res.add(substr)
-        }
+    if (s.length < 10) return [];
+    
+    let res = [];
+    let set = new Set();
+    let repeatedSet = new Set();
+    
+    for (let i = 0; i <= s.length - 10; i++) {
+        const subStr = s.substring(i, i + 10);
+        
+        if (set.has(subStr)) repeatedSet.add(subStr);
+        else set.add(subStr);
+        
     }
-    return [...res]
+    
+    return Array.from(repeatedSet);
+    
 };
