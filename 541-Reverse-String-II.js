@@ -3,7 +3,7 @@
  * @param {number} k
  * @return {string}
  */
-var reverseStr = function(s, k) {
+var reverseStr = function (s, k) {
     /**
     - Idea:
         - to reverse the odds k subStrings
@@ -19,7 +19,7 @@ var reverseStr = function(s, k) {
 
         /* kholoud's brute force
         - arr of ss 
-        - reverse odds
+        - reverse evens
         - join
         /
 
@@ -31,13 +31,13 @@ var reverseStr = function(s, k) {
 
 
 
-     function reverse (st) {
+    function reverse(st) {
         let returnedStr = \\
 
-        for (let i = st.length - 1; i>= 0; i--) returnedStr += st[i]
+        for (let i = st.length - 1; i >= 0; i--) returnedStr += st[i]
 
         return returnedStr
-     }
+    }
 
     // let arrStr = []
     //  for (let i = 0 ; i < s.length; i += k) {
@@ -62,7 +62,7 @@ var reverseStr = function(s, k) {
 
     for (let i = 0; i < s.length; i += 2 * k) {
         const evenK = s.substring(i, i + k)
-        const oddK = s.substring(i + k, i + 2 * k) 
+        const oddK = s.substring(i + k, i + 2 * k)
         res += reverse(evenK) + oddK
     }
     return res
