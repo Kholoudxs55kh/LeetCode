@@ -2,51 +2,64 @@
  * @param {character[][]} board
  * @return {boolean}
  */
-var isValidSudoku = function(board) {
+var isValidSudoku = function (board) {
+    /**
+    - Idea:
+        -- we have a 2D array length of all is 9, arr.len & arr[0].len = 9
+        -- we have to make sure that every row/column and 1/3 row && 1/3 column contains unique chars from 1-9
+        -- the array will have empty cells with \.\ marking it
+        -- if the sudoko is valid return true, not return false
+
+    - Edge Cases:
+        -- NA
+
+    - Approach:
+        -- check every column , to check ever i of the row \doesn't contain duplicates\
+        -- check every row, check the whole i of the board \doesn't contain duplicates\
+        -- have a way to check the sub array \doesn't contain duplicates\
+            -- 2 - 5 - 8 
+            -- to step by +3
+
+            set = > py, js
+
+            -- handle the \.\
+            -- we can use a key-numbered dict 1-9
+     */
+
     for (let row of board) {
-        const setRow = new Set()
+        let set = new Set()
+
         for (let i of row) {
-            if (setRow.has(i) && i !== \.\) return false
-            setRow.add(i)
+            if (i === \.\) continue
+            if (set.has(i)) return false
+            set.add(i)
         }
     }
 
-    // [0, 0], [1,0], [2,0]
-    for (let i = 0; i < board.length; i++) {
-        const setCol = new Set()
-        for (let j = 0;  j < board.length; j++) {
-            if (setCol.has(board[j][i]) && board[j][i] !== '.') return false
-            setCol.add(board[j][i])
+    for (let i = 0; i < 9; i++) {
+        let set = new Set()
+
+        for (let j = 0; j < 9; j++) {
+            if (board[j][i] === \.\) continue
+            if (set.has(board[j][i])) return false
+            set.add(board[j][i])
         }
     }
 
-    // 3 * 3
-    // 0  => [0,0] [0, 1] [0,2]       ||||||||  [0, 3] [0,4] [0,5]    => final [0,8]
-    // 1 => [1,0] [1,1] [1, 2]        ||||||||  [1,3] [1,4]  [1,5]    => final [1,8]
-    // 2 => [2,0] [2, 1] [2, 2]       ||||||||   [2, 3], [2,4] [2,5]  => final [2,8]
+    for (let box = 0; box < 9; box++) {
+        let set = new Set();
+        let startRow = Math.floor(box / 3) * 3;
+        let startCol = (box % 3) * 3;
 
-    // 3  => [3,0] [3, 1] [3,2]       ||||||||  [3, 3] [3,4] [3,5]    => final [3,8]
-    // 4 => [4,0] [4,1] [4, 2]        ||||||||  [4,3] [4,4]  [4,5]    => final [4,8]
-    // 5 => [5,0] [5, 1] [5, 2]       ||||||||   [5, 3], [5,4] [5,5]  => final [2,8]
-
-
-    // [6,0] => [6,8]       [8, 0]   => [8,8]
-    const setSquare = Array.from({ length: 9 }, () => new Set()); // whyyyyyyyyyy ???
-    
-    for (let row = 0; row < 9; row++) {
-        for (let col = 0; col < 9; col++) {
-            const curr = board[row][col]
-
-            const blockRow = Math.floor(row / 3);
-            const blockCol = Math.floor(col / 3);
-
-            const squareIndex = blockRow * 3 + blockCol;
-
-            if (setSquare[squareIndex].has(curr) && curr !== '.') return false
-
-            setSquare[squareIndex].add(curr)
+        for (let row = 0; row < 3; row++) {
+            for (let col = 0; col < 3; col++) {
+                let cell = board[startRow + row][startCol + col];
+                if (cell === \.\) continue;
+                if (set.has(cell)) return false;
+                set.add(cell);
+            }
         }
     }
 
-    return true
+    return true;
 };
