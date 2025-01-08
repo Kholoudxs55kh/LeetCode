@@ -2,36 +2,26 @@
  * @param {string} s
  * @return {boolean}
  */
-var isPalindrome = function(s) {
-    s = s.toLowerCase();
-    console.log(s);
-    for (let start = 0, end = s.length - 1; start < end; ) {
-        const codeStart = s.charCodeAt(start);
-        const codeEnd = s.charCodeAt(end);
+var isPalindrome = function (s) {
+    /**
+    Idea:
+        -- to make sure the string reads the same forward and backward
+        -- Remove all non-alphanum from the string
 
-        console.log(codeStart, codeEnd);
+    Edge Cases:
+        -- one letter
+        -- empty string
 
-        if (!(codeStart > 47 && codeStart < 58) &&
-            !(codeStart > 64 && codeStart < 91) &&
-            !(codeStart > 96 && codeStart < 123)) {
-            start++;
-            continue;
-        }
+    Approach:
+        -- handle all non-alphanums and convert the uppers to lowers
+        -- loop over the sts with 2 pointers to make sure they both meet at the same val
+        -- return true if the condition is valid, false otherwise.
+    */
 
-        if (!(codeEnd > 47 && codeEnd < 58) &&
-            !(codeEnd > 64 && codeEnd < 91) &&
-            !(codeEnd > 96 && codeEnd < 123)) {
-            end--;
-            continue;
-        }
+    s = s.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
 
-        if (s[start] !== s[end]) return false;
-
-        start++;
-        end--;
+    for (let start = 0, end = s.length - 1; start < s.length, end >= 0; start++, end--) {
+        if (s[start] !== s[end]) return false
     }
-
-    return true;
+    return true
 };
-
-// console.log(isPalindrome(\A man, a plan, a canal: Panama\));
