@@ -20,31 +20,24 @@ var findThePrefixCommonArray = function (A, B) {
 
      */
 
-    let res = [];
-    let count = 0;
-    let mapC = new Map();
+    let res = []
+    let count = 0
+    let mapC = new Map()
 
     for (let i = 0; i < A.length; i++) {
         if (mapC.has(A[i])) {
-            mapC.set(A[i], mapC.get(A[i]) + 1);
-            if (mapC.get(A[i]) === 2) {
-                count++;
-            }
-        } else {
-            mapC.set(A[i], 1);
-        }
+            mapC.set(A[i], mapC.get(A[i]) + 1)
+            if (mapC.get(A[i]) === 2) count++
+
+        } else mapC.set(A[i], 1)
 
         if (mapC.has(B[i])) {
-            mapC.set(B[i], mapC.get(B[i]) + 1);
-            if (mapC.get(B[i]) === 2) {
-                count++;
-            }
-        } else {
-            mapC.set(B[i], 1);
-        }
-
-        res.push(count);
+            mapC.set(B[i], mapC.get(B[i]) + 1)
+            if (mapC.get(B[i]) === 2) count++
+        } else mapC.set(B[i], 1)
+        
+        res.push(count)
     }
 
-    return res;
+    return res
 };
