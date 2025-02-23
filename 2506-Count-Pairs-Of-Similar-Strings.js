@@ -3,6 +3,8 @@
  * @return {number}
  */
 var similarPairs = function (words) {
+    let count = 0
+
     words = words.map((curr) => {
         let set = new Set([...curr])
         let arr = Array.from(set)
@@ -15,7 +17,6 @@ var similarPairs = function (words) {
 
     let pairs = words.reduce((map, cur) => map.set(cur, map.get(cur) + 1 || 1), new Map())
 
-    let count = 0
     for (let pair of pairs.values()) count += (pair * (pair - 1)) / 2
 
     return count
